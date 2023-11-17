@@ -11,7 +11,5 @@ import java.util.Optional;
 @Repository
 public interface TransactionPostgresDao extends JpaRepository<TransactionPostgres, Long> {
 
-    Optional<List<TransactionPostgres>> findByTransactionDateBetween(LocalDate transactionDate, LocalDate transactionDate2);
-
     Optional<List<TransactionPostgres>> findByCustomerAccountIdAndTransactionDateBetween(Long accountId, LocalDate startDate, LocalDate endDate);
 }

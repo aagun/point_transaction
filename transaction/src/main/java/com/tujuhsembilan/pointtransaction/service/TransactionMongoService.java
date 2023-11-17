@@ -59,10 +59,6 @@ public class TransactionMongoService {
         );
     }
 
-    public List<TransactionMongo> getAllTransactions() {
-        return transactionMongoDao.findAll();
-    }
-
     public List<TransactionResponse> getAllMappedTransactions() {
         List<TransactionMongo> transactions = transactionMongoDao.findAll();
         return transactions.stream()
