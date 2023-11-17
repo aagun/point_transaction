@@ -1,15 +1,21 @@
 package com.tujuhsembilan.pointtransaction.service;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tujuhsembilan.pointtransaction.dto.ReportRequest;
 import com.tujuhsembilan.pointtransaction.dto.ReportResponse;
 import com.tujuhsembilan.pointtransaction.dto.ResponseDto;
 import com.tujuhsembilan.pointtransaction.enums.TransactionStatus;
 import com.tujuhsembilan.pointtransaction.helper.ResponseDtoHelper;
 import com.tujuhsembilan.pointtransaction.model.Transaction;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -33,30 +39,14 @@ import java.util.List;
 @AllArgsConstructor
 public class ReportService {
 
-    public ResponseDto getReport(ReportRequest reportRequest) {
+    private ObjectMapper mapper;
 
-        log.info(">>>>>>>>>>>>>>>>>>> reportRequest {}", reportRequest.toString());
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
+    public ResponseDto getReport(ReportRequest reportRequest) {
 
         Map<String, String> requestBody = new LinkedHashMap<>();
         requestBody.put("accountId", String.valueOf(reportRequest.getAccountId()));
         requestBody.put("startDate", reportRequest.getStartDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         requestBody.put("endDate", reportRequest.getEndDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-
-//        HttpEntity<Map<String, String>> responseEntity = new HttpEntity<>(requestBody, headers);
-//        RestTemplate restTemplate = new RestTemplate();
-//
-//        ResponseDto responsesss = restTemplate.exchange(
-//            "http://localhost:8082/api/v1/pg/transactions",
-//            HttpMethod.POST,
-//            responseEntity,
-//            ResponseDto.class
-//        ).getBody();
-//
-//        log.info(">>>>>>>>>>>>>>>>>>> result {}", responsesss.toString());
-//
 
         Mono<ResponseDto> responseMono = WebClient.create().post()
                 .uri("http://localhost:8082/api/v1/pg/transactions")
@@ -69,12 +59,8 @@ public class ReportService {
 
         ResponseDto responseDto = responseMono.blockOptional().orElse(ResponseDto.builder().build());
 
-
         List reports = responseDto.getData().stream().map(trx -> {
-
-            log.info(">>>>>>>>>> trx {}", trx.toString());
-            Transaction transaction = ((Transaction) trx);
-
+            Transaction transaction = mapper.convertValue(trx, Transaction.class);
             ReportResponse reportResponse = ReportResponse.builder()
                     .transactionDate(transaction.getTransactionDate().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")))
                     .description(transaction.getDescription())
