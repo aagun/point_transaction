@@ -1,0 +1,25 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: 'transaction'
+  data:
+    mongodb:
+      authentication-database: 'admin'
+      username: developer
+      password: mongodb
+      database: 'point_transaction'
+      port: 27017
+      host: 'localhost'
+  datasource:
+    url: jdbc:postgresql://localhost:5432/point_transaction
+    username: developer
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true

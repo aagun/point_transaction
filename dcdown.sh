@@ -1,0 +1,1 @@
+docker-compose down -v --remove-orphans && sudo rm -rf docker/postgres/volume/data
