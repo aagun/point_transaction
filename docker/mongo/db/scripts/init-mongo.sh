@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+mongosh -u "$MONGO_INITDB_ROOT_USERNAME" -p "$MONGO_INITDB_ROOT_PASSWORD" admin <<EOF
+  use $MONGO_INITDB_DATABASE
+EOF

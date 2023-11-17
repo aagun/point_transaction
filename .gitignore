@@ -39,6 +39,14 @@ build/
 
 ### Docker ###
 docker/**
+!docker/mongo
+!docker/mongo/db
+!docker/mongo/db/scripts/
 !docker/mongo/db/scripts/**
 !docker/mongo/db/mongodb.env
+!docker/mongo/express
 !docker/mongo/express/mongo-express.env
+!docker/postgres
+!docker/postgres/scripts
+!docker/postgres/scripts/**
+!docker/postgres/pg.env

@@ -69,7 +69,7 @@ public class ReportService {
 
         ResponseDto responseDto = responseMono.blockOptional().orElse(ResponseDto.builder().build());
 
-        
+
         List reports = responseDto.getData().stream().map(trx -> {
 
             log.info(">>>>>>>>>> trx {}", trx.toString());
