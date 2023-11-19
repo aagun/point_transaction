@@ -1,8 +1,10 @@
 server:
-  port: 8083
+  port: 8084
 spring:
+  profiles:
+    active: default
   application:
-    name: report
+    name: point
   datasource:
     url: jdbc:postgresql://localhost:5432/point_transaction
     username: developer

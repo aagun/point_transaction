@@ -6,18 +6,17 @@
         <artifactId>point-transaction</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>point</artifactId>
+    <artifactId>customer</artifactId>
     <packaging>jar</packaging>
-    <url>https://tujuhsembilan.com</url>
+    <name>customer</name>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <spring.boot.maven.plugin.version>3.1.5</spring.boot.maven.plugin.version>
+        <java.version>17</java.version>
         <spring.boot.web.version>3.1.5</spring.boot.web.version>
         <spring.boot.test.version>3.1.5</spring.boot.test.version>
         <spring.boot.data.jpa.version>3.1.5</spring.boot.data.jpa.version>
-        <postgres.version>42.6.0</postgres.version>
+        <spring.boot.maven.plugin.version>3.1.5</spring.boot.maven.plugin.version>
+        <postgres.driver.version>42.6.0</postgres.driver.version>
     </properties>
 
     <dependencies>
@@ -28,13 +27,18 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.boot.test.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
             <version>${spring.boot.data.jpa.version}</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.6.0</version>
+            <version>${postgres.driver.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>

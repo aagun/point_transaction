@@ -8,6 +8,8 @@
         <module>transaction</module>
         <module>report</module>
         <module>point</module>
+        <module>customer</module>
+        <module>clients</module>
     </modules>
     <version>1.0-SNAPSHOT</version>
 
@@ -46,6 +48,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <version>${spring.boot.test.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>4.0.3</version>
         </dependency>
     </dependencies>
 
